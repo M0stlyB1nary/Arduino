@@ -34,6 +34,7 @@ Adafruit_7segment matrix = Adafruit_7segment();
 
 unsigned long startMillis;
 unsigned long currentMillis;
+unsigned long deltaMillis;
 const unsigned long period = 1000;  //the value is a number of milliseconds
 
 void setup() {
@@ -47,7 +48,7 @@ void setup() {
 }
 
 void loop() {
-  currentMillis = millis();
+  
 
 // Distance loop:
   digitalWrite(trigPin, LOW);
@@ -64,11 +65,19 @@ void loop() {
 
   if (distance < 4)
   {
-    
+    //Time since the last sub-four inch measurement
+    currentMillis = millis();
+    unsigned long deltaMillis;
+    deltaMillis = (currentMillis- startMillis) /1000;
+    Serial.println(deltaMillis);
+    matrix.print(deltaMillis/1000);
+    matrix.writeDisplay();
+    startMillis = millis(); //Reset
+    delay(1000);
   }
   matrix.print(distance);
   matrix.writeDisplay();
-  delay(250);
+  delay(1000);
 
 
   // Loop function runs over and over again to implement the clock logic.
