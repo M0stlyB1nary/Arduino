@@ -7,3 +7,7 @@ Last Update 1/6/2024
 - Green wire: Pin 11
 - Black wire: Pin 13
 - 10 amp powersupply to LED String
+
+### Libraries
+- Included FAST LED https://fastled.io/
+
